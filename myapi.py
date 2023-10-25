@@ -1,6 +1,7 @@
 ''' Making API calls and recieving responses '''
 
 import paralleldots as pds
+import configparser as cfgp
 
 
 class MyAPI:
@@ -8,7 +9,12 @@ class MyAPI:
     # Setting up the API Key ...
 
     def __init__(self):
-        pds.set_api_key('x7JLrbFYLd97Sn11LTx4PFyx25pUAGacyk8E5W73SoU')
+
+        cfg = cfgp.ConfigParser()
+        cfg.read('settings.cfg')
+        api_key = cfg.get('PD', 'api_key')
+
+        pds.set_api_key(apikey=api_key)
 
     # Responses for Sentiment Analysis ...
 
