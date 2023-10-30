@@ -189,8 +189,9 @@ class NLPApp:
         label1.configure(bg='white', font=('Arial', 10))
 
         self.sentiment_input = Text(
-            self.root, height=5, width=35, highlightthickness=1, wrap='word')
+            self.root, height=5, width=40, highlightthickness=1, wrap='word')
         self.sentiment_input.pack(pady=(0, 15), expand=False)
+        self.sentiment_input.configure(font=('Arial', 10))
 
         sentiment_btn = Button(
             self.root, text='Analyze Sentiment', width=30, command=self.senti_analysis)
@@ -200,7 +201,7 @@ class NLPApp:
 
         self.sentiment_result = Label(
             self.root, text='', fg='blue', bg='white')
-        self.sentiment_result.pack(pady=(40, 13))
+        self.sentiment_result.pack(pady=(35, 18))
         self.sentiment_result.configure(
             font=('Arial', 11, 'bold'), height=4, justify='left', anchor='w')
 
@@ -246,7 +247,7 @@ class NLPApp:
         self.ner_input = Text(
             self.root, height=5, width=40, highlightthickness=1, wrap='word')
         self.ner_input.pack(pady=(0, 15), expand=False)
-        self.ner_input.configure(font=('Arial', 9))
+        self.ner_input.configure(font=('Arial', 10))
 
         ner_btn = Button(
             self.root, text='Recognize Entities', width=30, command=self.ner)
@@ -256,7 +257,7 @@ class NLPApp:
 
         self.ner_result = Text(self.root, height=6,
                                width=35, highlightthickness=2, wrap='word')
-        self.ner_result.pack(pady=(20, 29))
+        self.ner_result.pack(pady=(20, 24))
         self.ner_result.configure(font=('Arial', 9, 'bold'))
 
         back_btn = Button(self.root, text='Go Back',
@@ -294,8 +295,9 @@ class NLPApp:
         label1.configure(bg='white', font=('Arial', 10))
 
         self.emo_input = Text(
-            self.root, height=5, width=35, highlightthickness=1, wrap='word')
+            self.root, height=5, width=40, highlightthickness=1, wrap='word')
         self.emo_input.pack(pady=(0, 15), expand=False)
+        self.emo_input.configure(font=('Arial', 10))
 
         emo_btn = Button(
             self.root, text='Predict Emotion', width=30, command=self.senti_analysis)
