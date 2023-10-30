@@ -35,13 +35,11 @@ class MyAPI:
         return response
 
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
 
-#     sample = MyAPI()
-#     text = input("\n Enter the text : ")
-#     res = sample.sentiment(text=text)
+    sample = MyAPI()
+    text = input("\n Enter the text : ")
+    res = sample.ner(text=text)
 
-#     response = ''
-#     for i in res['sentiment']:
-#         response += i.title() + ' \t->\t' + \
-#             f"{round(res['sentiment'][i]*100,2)} %\n"
+    for i in res['entities']:
+        print(f"{i['name']} is a {i['category']}.\n")

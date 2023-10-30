@@ -229,11 +229,103 @@ class NLPApp:
 
     def ner_gui(self):
         self.clear()
-        pass
+
+        heading = Label(self.root, text='NLP App', bg='white', fg='blue')
+        heading.pack(pady=(30, 30))
+        heading.configure(font=('Lucida Sans', 24, 'bold'))
+
+        heading2 = Label(self.root, text='Named Entity Recognition',
+                         bg='white', fg='black')
+        heading2.pack(pady=(0, 20))
+        heading2.configure(font=('Lucida Sans', 14, 'bold'))
+
+        label1 = Label(self.root, text='Enter the text for analysis.')
+        label1.pack(pady=(10, 10), padx=(0, 130))
+        label1.configure(bg='white', font=('Arial', 10))
+
+        self.ner_input = Text(
+            self.root, height=5, width=40, highlightthickness=1, wrap='word')
+        self.ner_input.pack(pady=(0, 15), expand=False)
+        self.ner_input.configure(font=('Arial', 9))
+
+        ner_btn = Button(
+            self.root, text='Recognize Entities', width=30, command=self.ner)
+        ner_btn.pack(pady=(10, 0))
+        ner_btn.configure(bg='blue', fg='white',
+                          font=('Arial', 9, 'bold'))
+
+        self.ner_result = Text(self.root, height=6,
+                               width=35, highlightthickness=2, wrap='word')
+        self.ner_result.pack(pady=(20, 29))
+        self.ner_result.configure(font=('Arial', 9, 'bold'))
+
+        back_btn = Button(self.root, text='Go Back',
+                          width=15, command=self.home_gui)
+        back_btn.pack(pady=(0, 10))
+        back_btn.configure(bg='lightblue', fg='black',
+                           font=('Arial', 9, 'bold'))
+
+    def ner(self):
+        self.ner_result.delete('1.0', tk.END)
+
+        text = self.ner_input.get('1.0', tk.END)
+        req = self.apio.ner(text=text)
+
+        res = ''
+        for i in req['entities']:
+            res += f"{i['name']} is a {i['category']}.\n"
+
+        self.ner_result.insert("1.0", res)
 
     def emo_gui(self):
         self.clear()
-        pass
+
+        heading = Label(self.root, text='NLP App', bg='white', fg='blue')
+        heading.pack(pady=(30, 30))
+        heading.configure(font=('Lucida Sans', 24, 'bold'))
+
+        heading2 = Label(self.root, text='Emotion Prediction',
+                         bg='white', fg='black')
+        heading2.pack(pady=(0, 30))
+        heading2.configure(font=('Lucida Sans', 16, 'bold'))
+
+        label1 = Label(self.root, text='Enter the text for analysis.')
+        label1.pack(pady=(10, 10), padx=(0, 130))
+        label1.configure(bg='white', font=('Arial', 10))
+
+        self.emo_input = Text(
+            self.root, height=5, width=35, highlightthickness=1, wrap='word')
+        self.emo_input.pack(pady=(0, 15), expand=False)
+
+        emo_btn = Button(
+            self.root, text='Predict Emotion', width=30, command=self.senti_analysis)
+        emo_btn.pack(pady=(10, 0))
+        emo_btn.configure(bg='blue', fg='white',
+                          font=('Arial', 9, 'bold'))
+
+        self.emo_result = Label(
+            self.root, text='', fg='blue', bg='white')
+        self.emo_result.pack(pady=(40, 13))
+        self.emo_result.configure(
+            font=('Arial', 11, 'bold'), height=4, justify='left', anchor='w')
+
+        back_btn = Button(self.root, text='Go Back',
+                          width=15, command=self.home_gui)
+        back_btn.pack(pady=(0, 10))
+        back_btn.configure(bg='lightblue', fg='black',
+                           font=('Arial', 9, 'bold'))
+
+    def emo(self):
+        self.ner_result['text'] = ''
+
+        text = self.ner_input.get('1.0', tk.END)
+        req = self.apio.ner(text=text)
+
+        res = ''
+        for i in req['entities']:
+            res += f"{i['name']} is a {i['category']}.\n"
+
+        self.ner_result['text'] = res
 
     def clear(self):
         for i in self.root.pack_slaves():
