@@ -2,14 +2,14 @@
 
 An API-based NLP application created using **tkinter** and **OOP** in **Python**.
 
----
 
-### Screenshot
+### Screenshots
 
-![Screenshot](resources/ss.png)
+<!-- ![Screenshot](resources/ss.png) -->
+<img src="resources/sa.png" height="300" alt="sa">
+<img src="resources/ner.png" height="300" alt="ner">
+<img src="resources/emo.png" height="300" alt="emo">
 
----
 
 ### Link for API
-
 https://komprehend.io/api-wrappers
