@@ -132,7 +132,7 @@ class NLPApp:
                 case False:
                     messagebox.showerror('Error', 'Password already in use.')
         else:
-            messagebox.showinfo('Sucess', 'Registration successful!')
+            messagebox.showinfo('Success', 'Registration successful!')
 
     def home_gui(self):
         self.clear()
