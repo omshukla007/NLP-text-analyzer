@@ -57,7 +57,7 @@ class NLPApp:
                               width=15, height=1, command=self.register_gui)
         redirect_btn.pack(pady=(0, 10))
         redirect_btn.configure(bg='green', fg='white',
-                               font=('Arial', 9))
+                               font=('Arial', 9, 'bold'))
 
     def register_gui(self):
         self.clear()
@@ -101,7 +101,7 @@ class NLPApp:
                            width=15, height=1, command=self.login_gui)
         login_btn.pack(pady=(0, 10))
         login_btn.configure(bg='green', fg='white',
-                            font=('Arial', 9))
+                            font=('Arial', 9, 'bold'))
 
     # Logic for L O G G I N G  I N ...
 
@@ -215,10 +215,10 @@ class NLPApp:
         self.sentiment_result['text'] = ''
 
         text = self.sentiment_input.get('1.0', tk.END)
-        req = self.apio.sentiment(text=text)['sentiment']
+        req = self.apio.sentiment(text=text)
 
         res = ''
-        for i in req:
+        for i in req['sentiment']:
             if i == 'negative':
                 res += i.title() + '  :\t' + \
                     f"{round(req['sentiment'][i]*100,2)} %\n"

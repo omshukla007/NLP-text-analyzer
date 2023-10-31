@@ -3,7 +3,6 @@
 import paralleldots as pds
 import configparser as cfgp
 import requests as req
-import json
 
 
 class MyAPI:
@@ -36,18 +35,3 @@ class MyAPI:
         response = req.post("https://apis.paralleldots.com/v4/new/intent",
                             data={"api_key": self.api_key, "text": text})
         return response
-
-
-if __name__ == "__main__":
-
-    sample = MyAPI()
-    text = input("\n Enter the text : ")
-    res = sample.intentc(text=text).json()['intent']
-
-    for i, j in res.items():
-        if i not in ['marketing', 'feedback']:
-            print(f"{i}\t   :\t{j*100}%")
-        elif i=='marketing':
-            print(f"{i}  :\t{j*100}%")
-        elif i=='feedback':
-            print(f"{i}   :\t{j*100}%")
