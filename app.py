@@ -18,7 +18,8 @@ class NLPApp:
         self.root.iconbitmap('resources/favicon.ico')
 
         # Login page loads on startup ...
-        self.login_gui()
+        # self.login_gui()
+        self.intent_gui()
 
         # Calling the event loop of Tk ...
         self.root.mainloop()
@@ -159,11 +160,11 @@ class NLPApp:
         ner_btn.configure(bg=btn_bg_col, fg='white',
                           font=('Arial', 10, 'bold'))
 
-        emotion_btn = Button(self.root, text='Emotion Prediction', width=25,
-                             height=2, command=self.emo_gui)
-        emotion_btn.pack(pady=(20, 10))
-        emotion_btn.configure(bg=btn_bg_col, fg='white',
-                              font=('Arial', 10, 'bold'))
+        intent_btn = Button(self.root, text='Intent Classification', width=25,
+                            height=2, command=self.intent_gui)
+        intent_btn.pack(pady=(20, 10))
+        intent_btn.configure(bg=btn_bg_col, fg='white',
+                             font=('Arial', 10, 'bold'))
 
         logout_btn = Button(self.root, text='Logout',
                             width=15, command=self.login_gui)
@@ -278,14 +279,14 @@ class NLPApp:
 
         self.ner_result.insert("1.0", res)
 
-    def emo_gui(self):
+    def intent_gui(self):
         self.clear()
 
         heading = Label(self.root, text='NLP App', bg='white', fg='blue')
         heading.pack(pady=(30, 30))
         heading.configure(font=('Lucida Sans', 24, 'bold'))
 
-        heading2 = Label(self.root, text='Emotion Prediction',
+        heading2 = Label(self.root, text='Intent Classification',
                          bg='white', fg='black')
         heading2.pack(pady=(0, 30))
         heading2.configure(font=('Lucida Sans', 16, 'bold'))
@@ -294,21 +295,21 @@ class NLPApp:
         label1.pack(pady=(10, 10), padx=(0, 130))
         label1.configure(bg='white', font=('Arial', 10))
 
-        self.emo_input = Text(
+        self.int_input = Text(
             self.root, height=5, width=40, highlightthickness=1, wrap='word')
-        self.emo_input.pack(pady=(0, 15), expand=False)
-        self.emo_input.configure(font=('Arial', 10))
+        self.int_input.pack(pady=(0, 15), expand=False)
+        self.int_input.configure(font=('Arial', 10))
 
-        emo_btn = Button(
-            self.root, text='Predict Emotion', width=30, command=self.senti_analysis)
-        emo_btn.pack(pady=(10, 0))
-        emo_btn.configure(bg='blue', fg='white',
+        int_btn = Button(
+            self.root, text='Classify Intent', width=30, command=self.intent)
+        int_btn.pack(pady=(10, 0))
+        int_btn.configure(bg='blue', fg='white',
                           font=('Arial', 9, 'bold'))
 
-        self.emo_result = Label(
+        self.int_result = Label(
             self.root, text='', fg='blue', bg='white')
-        self.emo_result.pack(pady=(40, 13))
-        self.emo_result.configure(
+        self.int_result.pack(pady=(20, 33))
+        self.int_result.configure(
             font=('Arial', 11, 'bold'), height=4, justify='left', anchor='w')
 
         back_btn = Button(self.root, text='Go Back',
@@ -317,17 +318,17 @@ class NLPApp:
         back_btn.configure(bg='lightblue', fg='black',
                            font=('Arial', 9, 'bold'))
 
-    def emo(self):
-        self.ner_result['text'] = ''
+    def intent(self):
+        self.int_result['text'] = ''
 
-        text = self.ner_input.get('1.0', tk.END)
-        req = self.apio.ner(text=text)
+        text = self.int_input.get('1.0', tk.END)
+        req = self.apio.intentc(text=text).json()["intent"]
 
         res = ''
-        for i in req['entities']:
-            res += f"{i['name']} is a {i['category']}.\n"
+        for i, j in req.items():
+            res += f"{i} : {round(j*100,2)}%\n"
 
-        self.ner_result['text'] = res
+        self.int_result['text'] = res
 
     def clear(self):
         for i in self.root.pack_slaves():
