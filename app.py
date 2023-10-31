@@ -18,7 +18,8 @@ class NLPApp:
         self.root.iconbitmap('resources/favicon.ico')
 
         # Login page loads on startup ...
-        self.login_gui()
+        # self.login_gui()
+        self.intent_gui()
 
         # Calling the event loop of Tk ...
         self.root.mainloop()
@@ -215,10 +216,10 @@ class NLPApp:
         self.sentiment_result['text'] = ''
 
         text = self.sentiment_input.get('1.0', tk.END)
-        req = self.apio.sentiment(text=text)
+        req = self.apio.sentiment(text=text)['sentiment']
 
         res = ''
-        for i in req['sentiment']:
+        for i in req:
             if i == 'negative':
                 res += i.title() + '  :\t' + \
                     f"{round(req['sentiment'][i]*100,2)} %\n"
@@ -325,7 +326,12 @@ class NLPApp:
 
         res = ''
         for i, j in req.items():
-            res += f"{i} : {round(j*100,2)}%\n"
+            if i in ['query', 'spam']:
+                res += i.title() + '\t    :\t' + f'{round(j*100,2)}%\n'
+            elif i == 'marketing':
+                res += i.title() + '   :\t' + f'{round(j*100,2)}%\n'
+            else:
+                res += i.title() + '   :\t' + f'{round(j*100,2)}%\n'
 
         self.int_result['text'] = res
 
