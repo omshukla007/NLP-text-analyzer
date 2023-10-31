@@ -18,8 +18,7 @@ class NLPApp:
         self.root.iconbitmap('resources/favicon.ico')
 
         # Login page loads on startup ...
-        # self.login_gui()
-        self.intent_gui()
+        self.login_gui()
 
         # Calling the event loop of Tk ...
         self.root.mainloop()
