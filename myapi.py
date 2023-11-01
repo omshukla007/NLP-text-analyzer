@@ -1,4 +1,4 @@
-''' Making API calls and recieving responses '''
+""" Making API calls and recieving responses """
 
 import paralleldots as pds
 import configparser as cfgp

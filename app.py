@@ -1,4 +1,4 @@
-''' Root of the application '''
+""" Root of the application """
 
 import tkinter as tk
 from tkinter import *
