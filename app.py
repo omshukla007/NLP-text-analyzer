@@ -3,14 +3,27 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
-from mydb import Database as db
-from myapi import MyAPI as api
+from mydb import Database as myDb
+from myapi import MyAPI as myApi
 
 
 class NLPApp:
 
     def __init__(self):
-        self.apio = api()
+
+        # Initializing the Widgets in __init__ ...
+        self.int_result = None
+        self.int_input = None
+        self.ner_result = None
+        self.ner_input = None
+        self.sentiment_result = None
+        self.sentiment_input = None
+        self.name_input = None
+        self.pwd_input = None
+        self.email_input = None
+
+        # Instantiating the necessary classes ...
+        self.apio = myApi()
         self.root = tk.Tk()
         self.root.title('NLP App')
         self.root.geometry('350x550')
@@ -109,8 +122,8 @@ class NLPApp:
         email = self.email_input.get()
         pwd = self.pwd_input.get()
 
-        loggedin = db()
-        response = loggedin.search(email=email, pwd=pwd)
+        logged = myDb()
+        response = logged.search(email=email, pwd=pwd)
         if response:
             self.home_gui()
         else:
@@ -123,7 +136,7 @@ class NLPApp:
         email = self.email_input.get()
         pwd = self.pwd_input.get()
 
-        register = db()
+        register = myDb()
         response = register.add_data(name=name, email=email, pwd=pwd)
         if response[0] == 0:
             match response[1]:
